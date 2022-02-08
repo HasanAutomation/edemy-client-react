@@ -1,5 +1,5 @@
 import './App.css';
-import { Container, Header } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import { Home } from './pages';
 import Navbar from './components/nav/Navbar';

@@ -1,6 +1,10 @@
 const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 
+// Modal names
+export const REGISTERFORM = 'RegisterForm';
+export const LOGINFORM = 'LoginForm';
+
 export function openModal(payload) {
   return {
     type: OPEN_MODAL,
