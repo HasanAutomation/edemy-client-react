@@ -1,2 +1,27 @@
 .App {
 }
+.msthead {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  ) !important;
+}
+.msthead h1.ui.header {
+  font-size: 4rem;
+}
+.ui.fixed.menu {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  ) !important;
+}
+.ui.container.main {
+  margin-top: 6em;
+}
