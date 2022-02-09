@@ -3,7 +3,10 @@ import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import ModalWrapper from '../../components/modals/ModalWrapper';
 import AppInput from '../../components/forms/AppInput';
-import { Button } from 'semantic-ui-react';
+import { Button, Label } from 'semantic-ui-react';
+import { signInWithEmail } from '../../services/firebaseService';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../../redux/auth/reducer/modalReducer';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -13,19 +16,32 @@ const validationSchema = Yup.object({
 });
 
 function LoginForm() {
+  const dispatch = useDispatch();
   return (
     <ModalWrapper size='mini' header='Login an User'>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={values => {
-          console.log(values);
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
+          try {
+            await signInWithEmail(values);
+            setSubmitting(false);
+            dispatch(closeModal());
+          } catch (err) {
+            setErrors({ auth: 'Invalid Credentials' });
+            setSubmitting(false);
+          }
         }}
         validationSchema={validationSchema}
       >
         {({ isSubmitting, dirty, isValid, errors }) => (
           <Form className='ui form'>
             <AppInput name='email' placeholder='Please add an email' />
-            <AppInput name='password' placeholder='Please add a password' />
+            <AppInput
+              type='password'
+              name='password'
+              placeholder='Please add a password'
+            />
+            {errors.auth && <Label basic color='red' content={errors.auth} />}
             <Button
               fluid
               color='teal'
