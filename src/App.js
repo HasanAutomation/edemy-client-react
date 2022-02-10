@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer hideProgressBar position='bottom-right' />
       <ModalManager />
       <Route exact path='/' component={Home} />
       <Route

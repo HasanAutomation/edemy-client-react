@@ -9,7 +9,7 @@ export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
       const {
-        user: { email, photoURL, displayName, uid },
+        user: { email, photoURL, displayName, uid, role, name, _id },
         token,
       } = action.payload;
       return {
@@ -18,8 +18,10 @@ export default function authReducer(state = initialState, action) {
         user: {
           email: email,
           photoURL: photoURL || '/user.png',
-          displayName: displayName,
+          displayName: displayName || name,
           uid: uid,
+          _id,
+          role,
           token,
         },
       };

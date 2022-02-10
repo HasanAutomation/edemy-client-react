@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import { signOut } from '../../services/firebaseService';
+import constants from '../../utils/constant';
 
 function SignedInMenu({ user }) {
   const history = useHistory();
@@ -11,6 +12,7 @@ function SignedInMenu({ user }) {
   async function handleSignOut() {
     try {
       await signOut();
+      localStorage.removeItem(constants.TOKEN_KEY);
       history.push('/');
     } catch (err) {
       console.log(err);
