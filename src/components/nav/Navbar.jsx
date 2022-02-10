@@ -27,6 +27,7 @@ function Navbar() {
             marginLeft: 20,
             height: 50,
             borderRadius: 30,
+            marginRight: 10,
           }}
         >
           <Formik

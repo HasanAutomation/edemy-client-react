@@ -8,14 +8,19 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
+      const {
+        user: { email, photoURL, displayName, uid },
+        token,
+      } = action.payload;
       return {
         ...state,
         authenticated: true,
         user: {
-          email: action.payload.email,
-          photoURL: action.payload.photoURL || '/user.png',
-          displayName: action.payload.displayName,
-          uid: action.payload.uid,
+          email: email,
+          photoURL: photoURL || '/user.png',
+          displayName: displayName,
+          uid: uid,
+          token,
         },
       };
     case SIGN_OUT:

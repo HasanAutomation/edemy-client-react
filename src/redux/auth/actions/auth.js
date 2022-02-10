@@ -17,9 +17,10 @@ export function signOut() {
 
 export function verifyUser() {
   return function (dispatch) {
-    return firebase.auth().onAuthStateChanged(user => {
+    return firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        dispatch(signInUser(user));
+        const resultToken = await user.getIdTokenResult();
+        dispatch(signInUser({ user, token: resultToken.token }));
         dispatch({ type: APP_LOADED });
       } else {
         dispatch(signOut());
