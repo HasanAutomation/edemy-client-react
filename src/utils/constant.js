@@ -4,6 +4,9 @@ const constants = {
     createUser: '/users/create',
     currentUser: '/users/current',
   },
+  roles: {
+    admin: 'admin',
+  },
 };
 
 export default constants;

@@ -19,9 +19,7 @@ export async function signUpUserWithEmail(creds) {
 }
 
 export async function signInWithEmail(creds) {
-  const result = await firebase
-    .auth()
-    .signInWithEmailAndPassword(creds.email, creds.password);
+  await firebase.auth().signInWithEmailAndPassword(creds.email, creds.password);
   // const { token } = await result.user.getIdTokenResult();
   // localStorage.setItem(constants.TOKEN_KEY, token);
 }

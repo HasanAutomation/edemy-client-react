@@ -8,6 +8,7 @@ import SandBox from './pages/sandBox/SandBox';
 import { useSelector } from 'react-redux';
 import LoadingComponent from './components/loader/LoadingComponent';
 import { ToastContainer } from 'react-toastify';
+import AdminRoute from './components/routes/AdminRoute';
 
 function App() {
   const { initialized } = useSelector(state => state.async);
@@ -26,7 +27,7 @@ function App() {
             <Navbar />
             <Container className='main'>
               <Switch>
-                <Route path='/sandbox' component={SandBox} />
+                <AdminRoute path='/sandbox' component={SandBox} />
               </Switch>
             </Container>
           </>

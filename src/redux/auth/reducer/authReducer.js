@@ -1,8 +1,11 @@
 import { SIGN_IN, SIGN_OUT } from '../constants/auth';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 const initialState = {
   user: null,
   authenticated: false,
+  prevLocation: null,
+  currentLocation: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -30,6 +33,12 @@ export default function authReducer(state = initialState, action) {
         ...state,
         authenticated: false,
         user: null,
+      };
+    case LOCATION_CHANGE:
+      return {
+        ...state,
+        prevLocation: state.currentLocation,
+        currentLocation: action.payload.location,
       };
     default:
       return state;
