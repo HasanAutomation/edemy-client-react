@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
@@ -14,7 +14,7 @@ function SandBox() {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.test);
   return (
-    <div>
+    <Container>
       <Button
         content='Open Modal'
         onClick={() =>
@@ -33,7 +33,7 @@ function SandBox() {
           <Button color='red' content='Submit' type='submit' />
         </Form>
       </Formik>
-    </div>
+    </Container>
   );
 }
 

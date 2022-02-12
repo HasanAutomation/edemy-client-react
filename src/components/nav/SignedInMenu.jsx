@@ -26,8 +26,20 @@ function SignedInMenu({ user }) {
           <Dropdown.Item as={Link} to='/my-courses' text='My Learning' />
           <Dropdown.Item
             as={Link}
-            to={`/profile/12`}
+            to={`/user/profile/12`}
             text='My Profile'
+            icon='user'
+          />
+          <Dropdown.Item
+            as={Link}
+            to={`/user/dashboard`}
+            text='Dashboard'
+            icon='user'
+          />
+          <Dropdown.Item
+            as={Link}
+            to={`/admin/dashboard`}
+            text='Admin Dashboard'
             icon='user'
           />
           <Dropdown.Item

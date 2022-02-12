@@ -1,7 +1,7 @@
 import './App.css';
 import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
-import { Home } from './pages';
+import { AdminDashboard, Home } from './pages';
 import Navbar from './components/nav/Navbar';
 import ModalManager from './components/modals/ModalManager';
 import SandBox from './pages/sandBox/SandBox';
@@ -25,11 +25,15 @@ function App() {
         render={() => (
           <>
             <Navbar />
-            <Container className='main'>
+            <div className='main'>
               <Switch>
                 <AdminRoute path='/sandbox' component={SandBox} />
+                <AdminRoute
+                  path='/admin/dashboard'
+                  component={AdminDashboard}
+                />
               </Switch>
-            </Container>
+            </div>
           </>
         )}
       />
