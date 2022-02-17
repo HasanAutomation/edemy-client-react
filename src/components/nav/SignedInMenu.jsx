@@ -21,36 +21,19 @@ function SignedInMenu({ user }) {
   return (
     <Menu.Item position='right'>
       <Image avatar spaced='right' src={user.photoURL} />
-      <Dropdown pointing='top left' text={user.displayName}>
+      <Dropdown pointing='top left' icon={'user'} text={user.displayName}>
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to='/my-courses' text='My Learning' />
-          <Dropdown.Item
-            as={Link}
-            to={`/user/profile/12`}
-            text='My Profile'
-            icon='user'
-          />
-          <Dropdown.Item
-            as={Link}
-            to={`/user/dashboard`}
-            text='Dashboard'
-            icon='user'
-          />
+          <Dropdown.Item as={Link} to={`/user/profile/12`} text='My Profile' />
+          <Dropdown.Item as={Link} to={`/user/dashboard`} text='Dashboard' />
           <Dropdown.Item
             as={Link}
             to={`/admin/dashboard`}
             text='Admin Dashboard'
-            icon='user'
           />
-          <Dropdown.Item
-            as={Link}
-            to='/account'
-            icon='settings'
-            text='My Account'
-          />
+          <Dropdown.Item as={Link} to='/account' text='My Account' />
           <Dropdown.Item
             text='Sign Out'
-            icon='power'
             onClick={async () => {
               await handleSignOut();
             }}

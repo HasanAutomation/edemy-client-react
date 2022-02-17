@@ -20,10 +20,21 @@ export async function signUpUserWithEmail(creds) {
 
 export async function signInWithEmail(creds) {
   await firebase.auth().signInWithEmailAndPassword(creds.email, creds.password);
-  // const { token } = await result.user.getIdTokenResult();
-  // localStorage.setItem(constants.TOKEN_KEY, token);
 }
 
 export async function signOut() {
   await firebase.auth().signOut();
+}
+
+export function uploadToFirebase(filename, file) {
+  const user = firebase.auth().currentUser;
+  const storageRef = firebase.storage().ref();
+  return storageRef.child(`/${user.uid}/media/${filename}`).put(file);
+}
+
+export function deleteFromFirebase(filename) {
+  const user = firebase.auth().currentUser;
+  const storageRef = firebase.storage().ref();
+  const mediaRef = storageRef.child(`/${user.uid}/media/${filename}`);
+  return mediaRef.delete();
 }

@@ -13,27 +13,37 @@ function Sidebar({ menus }) {
     <Grid>
       <Grid.Column width={3}>
         <div className='custom-sidebar'>
-          {menus.map(menu => (
-            <Menu.Item
-              key={menu.path}
-              as={NavLink}
-              to={`${url}/${menu.path}`}
-              className='link-item'
-            >
-              {menu.name}
-            </Menu.Item>
-          ))}
+          {menus.map(
+            menu =>
+              menu.name && (
+                <Menu.Item
+                  key={menu.path}
+                  as={NavLink}
+                  to={`${url}/${menu.path}`}
+                  className='link-item'
+                >
+                  {menu.name}
+                </Menu.Item>
+              )
+          )}
         </div>
       </Grid.Column>
       <Grid.Column width={13}>
         <Switch>
-          {menus.map(menu => (
-            <Route
-              key={menu.path}
-              path={`${path}/${menu.path}`}
-              component={menu.component}
-            />
-          ))}
+          {menus.map(({ path: pathCompo, component, exact, redirect = null }) =>
+            redirect ? (
+              <Route key={pathCompo} path={`${path}`} exact={exact}>
+                {redirect()}
+              </Route>
+            ) : (
+              <Route
+                key={pathCompo}
+                path={`${path}/${pathCompo}`}
+                exact={exact}
+                component={component}
+              />
+            )
+          )}
         </Switch>
       </Grid.Column>
     </Grid>
