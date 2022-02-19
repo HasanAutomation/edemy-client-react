@@ -1,0 +1,1 @@
+export const GET_ADMIN_COURSES = 'GET_ADMIN_COURSES';

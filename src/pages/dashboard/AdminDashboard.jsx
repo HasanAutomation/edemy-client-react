@@ -1,30 +1,42 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
+import Course from '../admin/Course';
 import CourseForm from '../admin/CourseForm';
 import Draft from '../admin/Draft';
+import Dashboard from './Dashboard';
 
 function AdminDashboard() {
   const routes = [
     {
-      name: '',
+      name: 'Dashboard',
       path: '/',
-      component: null,
+      component: Dashboard,
       exact: true,
-      redirect() {
-        return <Redirect to='/admin/dashboard/create-course' />;
-      },
     },
     {
       name: 'Create Course',
-      path: 'create-course',
+      // path: '/create-course',
+      path: ['/create-course', '/course/:slug/edit'],
+      exact: true,
       component: CourseForm,
     },
     {
       name: 'Draft Course',
-      path: 'draft-course',
+      path: '/draft-course',
+      exact: true,
       component: Draft,
     },
+    {
+      name: '',
+      path: '/course/:slug',
+      component: Course,
+    },
+    // {
+    //   name: '',
+    //   path: '/course/:slug/edit',
+    //   component: CourseForm,
+    //   exact: true,
+    // },
   ];
 
   return <Sidebar menus={routes} />;

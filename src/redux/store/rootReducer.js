@@ -4,6 +4,7 @@ import asyncReducer from '../async/asyncReducer';
 import authReducer from '../auth/reducer/authReducer';
 import modalReducer from '../auth/reducer/modalReducer';
 import { connectRouter } from 'connected-react-router';
+import courseReducer from '../course/courseReducer';
 
 const rootReducer = history =>
   combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = history =>
     test: testReducer,
     modals: modalReducer,
     async: asyncReducer,
+    course: courseReducer,
   });
 
 export default rootReducer;

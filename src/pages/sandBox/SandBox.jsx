@@ -5,6 +5,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
 import AppInput from '../../components/forms/AppInput';
+import CustomVideoPlayer from '../../components/video/CustomVideoPlayer';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Please add a name'),
@@ -33,6 +34,7 @@ function SandBox() {
           <Button color='red' content='Submit' type='submit' />
         </Form>
       </Formik>
+      <CustomVideoPlayer />
     </Container>
   );
 }

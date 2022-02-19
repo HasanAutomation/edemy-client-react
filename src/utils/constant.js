@@ -3,6 +3,8 @@ const constants = {
   endpoints: {
     createUser: '/users/create',
     currentUser: '/users/current',
+    createCourse: '/courses/create',
+    adminCourses: '/courses/admin',
   },
   roles: {
     admin: 'admin',

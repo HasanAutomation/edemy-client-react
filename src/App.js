@@ -1,5 +1,4 @@
 import './App.css';
-import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import { AdminDashboard, Home } from './pages';
 import Navbar from './components/nav/Navbar';
@@ -12,6 +11,22 @@ import AdminRoute from './components/routes/AdminRoute';
 
 function App() {
   const { initialized } = useSelector(state => state.async);
+
+  // var elem = document.documentElement;
+
+  // function openFullscreen() {
+  //   if (elem) {
+  //     if (elem.requestFullscreen) {
+  //       elem.requestFullscreen();
+  //     } else if (elem.webkitRequestFullscreen) {
+  //       /* Safari */
+  //       elem.webkitRequestFullscreen();
+  //     } else if (elem.msRequestFullscreen) {
+  //       /* IE11 */
+  //       elem.msRequestFullscreen();
+  //     }
+  //   }
+  // }
 
   if (!initialized) return <LoadingComponent />;
 
