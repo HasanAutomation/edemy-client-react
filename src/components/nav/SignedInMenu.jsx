@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import { signOut } from '../../services/firebaseService';
+import { UserOutlined } from '@ant-design/icons';
 import constants from '../../utils/constant';
 
 function SignedInMenu({ user }) {
@@ -21,7 +22,7 @@ function SignedInMenu({ user }) {
   return (
     <Menu.Item position='right'>
       <Image avatar spaced='right' src={user.photoURL} />
-      <Dropdown pointing='top left' icon={'user'} text={user.displayName}>
+      <Dropdown pointing='top left' icon={null} text={user.displayName}>
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to='/my-courses' text='My Learning' />
           <Dropdown.Item as={Link} to={`/user/profile/12`} text='My Profile' />
@@ -40,6 +41,11 @@ function SignedInMenu({ user }) {
           />
         </Dropdown.Menu>
       </Dropdown>
+      <UserOutlined
+        style={{
+          marginLeft: 4,
+        }}
+      />
     </Menu.Item>
   );
 }

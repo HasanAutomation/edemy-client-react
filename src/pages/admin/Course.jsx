@@ -12,6 +12,7 @@ import './Course.scss';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
+import CustomAccordian from '../../components/customAccordian/CustomAccordian';
 
 function Course() {
   const { slug } = useParams();
@@ -67,6 +68,36 @@ function Course() {
       <ReactMarkdown>{course.description}</ReactMarkdown>
       {/* Add button to add sections */}
       <Button content='Add Section' color='teal' onClick={openSectionModal} />
+
+      {/* Section List */}
+      <div className='sections'>
+        <h2>
+          {course.sections.length}{' '}
+          {course.sections.length > 1 ? 'Sections' : 'Section'}
+        </h2>
+
+        {course.sections.map((section, index) => (
+          <>
+            <CustomAccordian
+              key={section._id}
+              title={`Section ${index + 1}: ${section.title}`}
+            >
+              <div className='lesson-upper'>
+                <h4>
+                  {section.lessons.length}{' '}
+                  {section.lessons.length > 1 ? 'Lessons' : 'Lesson'}
+                </h4>
+                <button>Add Lesson</button>
+              </div>
+
+              {section.lessons.map(lesson => (
+                <h5 key={lesson._id}>{lesson.title}</h5>
+              ))}
+            </CustomAccordian>
+            <br />
+          </>
+        ))}
+      </div>
     </div>
   );
 }

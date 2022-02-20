@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
 import AppInput from '../../components/forms/AppInput';
 import CustomVideoPlayer from '../../components/video/CustomVideoPlayer';
+import CustomAccordian from '../../components/customAccordian/CustomAccordian';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Please add a name'),
@@ -34,7 +35,10 @@ function SandBox() {
           <Button color='red' content='Submit' type='submit' />
         </Form>
       </Formik>
-      <CustomVideoPlayer />
+      {/* <CustomVideoPlayer /> */}
+      <CustomAccordian>
+        <h1>Hello There</h1>
+      </CustomAccordian>
     </Container>
   );
 }
