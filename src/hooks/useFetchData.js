@@ -6,18 +6,25 @@ import {
   asyncStart,
 } from '../redux/async/asyncReducer';
 
-export default function useFetchData({ request, data, deps }) {
+export default function useFetchData({
+  request,
+  data,
+  deps,
+  shouldExecute = true,
+}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(asyncStart());
-    request()
-      .then(res => {
-        data(res.data);
-        dispatch(asyncFinish());
-      })
-      .catch(err => {
-        dispatch(asyncError(err.response.data.errors));
-      });
+    if (shouldExecute) {
+      dispatch(asyncStart());
+      request()
+        .then(res => {
+          data(res.data);
+          dispatch(asyncFinish());
+        })
+        .catch(err => {
+          dispatch(asyncError(err.response.data.errors));
+        });
+    }
   }, deps); // eslint-disable-line react-hooks/exhaustive-deps
 }

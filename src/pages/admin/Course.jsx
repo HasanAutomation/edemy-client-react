@@ -10,6 +10,8 @@ import { EditOutlined, CheckOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import './Course.scss';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
+import { openModal } from '../../redux/auth/reducer/modalReducer';
 
 function Course() {
   const { slug } = useParams();
@@ -26,6 +28,10 @@ function Course() {
     data: res => dispatch(listenAdminCourses([res.data.course])),
     deps: [dispatch],
   });
+
+  function openSectionModal() {
+    dispatch(openModal({ modalType: 'SectionModal', modalProps: { course } }));
+  }
 
   if (loading || (!course && !error))
     return <LoadingComponent content='Loading course...' />;
@@ -59,6 +65,8 @@ function Course() {
       </div>
       {/* Description */}
       <ReactMarkdown>{course.description}</ReactMarkdown>
+      {/* Add button to add sections */}
+      <Button content='Add Section' color='teal' onClick={openSectionModal} />
     </div>
   );
 }

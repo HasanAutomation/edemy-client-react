@@ -23,7 +23,11 @@ import './CourseForm.scss';
 import coursesApi from '../../api/courses';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import useFetchData from '../../hooks/useFetchData';
+import { listenAdminCourses } from '../../redux/course/courseActions';
+import LoadingComponent from '../../components/loader/LoadingComponent';
+import { useEffect } from 'react';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Please provide a course name'),
@@ -51,8 +55,14 @@ function CourseForm() {
   const selectedCourse = useSelector(state =>
     state.course.adminCourses.find(c => c.slug === slug)
   );
+  const { loading } = useSelector(state => state.async);
   const [preview, setPreview] = useState(selectedCourse?.image || null);
   const [isPaid, setIsPaid] = useState(selectedCourse?.paid || false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setPreview(selectedCourse?.image);
+  }, [selectedCourse]);
 
   const initialValues = {
     ...selectedCourse,
@@ -66,6 +76,13 @@ function CourseForm() {
     image: null,
   };
 
+  useFetchData({
+    request: () => coursesApi.getSingleCourse(slug),
+    data: res => dispatch(listenAdminCourses([res.data.course])),
+    deps: [dispatch],
+    shouldExecute: !!slug,
+  });
+
   function handleUploadPhoto(file, setFieldValue) {
     setUploading(true);
     const filename = cuid() + '.' + getFileExtension(file.name);
@@ -75,7 +92,6 @@ function CourseForm() {
       snapshot => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(progress);
         setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       },
       err => {
@@ -98,14 +114,17 @@ function CourseForm() {
     );
   }
 
-  async function deletePhoto(filename) {
+  async function deletePhoto(filename, setFieldValue) {
     try {
       await deleteFromFirebase(filename);
       setPreview(null);
+      setFieldValue('image', null);
     } catch (err) {
       toast.error(err.message);
     }
   }
+
+  if (loading) return <LoadingComponent content='Fetching course...' />;
 
   return (
     <Segment
@@ -123,12 +142,16 @@ function CourseForm() {
         onSubmit={async (values, { setSubmitting }) => {
           try {
             selectedCourse
-              ? console.log('Updated Value', values)
+              ? await coursesApi.updateCourse(selectedCourse.slug, {
+                  ...values,
+                  instructor: selectedCourse.instructor,
+                  paid: values.paid === 'true',
+                })
               : await coursesApi.createCourse({
                   ...values,
                   paid: values.paid === 'true',
                 });
-            // history.push('/admin/dashboard');
+            history.push('/admin/dashboard');
           } catch (err) {
             err?.response?.data?.errors.forEach(error => {
               toast.error(error.message);
@@ -137,9 +160,6 @@ function CourseForm() {
           } finally {
             setSubmitting(false);
           }
-          // Make the request
-          // Turn offf the loading indiactor
-          // Rediredct to dashboard page
         }}
         validationSchema={validationSchema}
       >
@@ -166,21 +186,23 @@ function CourseForm() {
             <FormField>
               <input
                 type='file'
-                name='imagePreview'
+                name='image'
                 onChange={e => {
                   const file = e.target.files[0];
                   handleUploadPhoto(file, setFieldValue);
                 }}
               />
-              {errors['imagePreview'] && touched['imagePreview'] ? (
-                <Label basic color='red' content={errors['imagePreview']} />
+              {errors['image'] && touched['image'] ? (
+                <Label basic color='red' content={errors['image']} />
               ) : null}
             </FormField>
             {uploading && <Progress percent={progress} autoSuccess />}
             {preview && (
               <div className='image-container'>
                 <img src={preview.downloadURL} alt='preview' />
-                <span onClick={() => deletePhoto(preview.name)}>X</span>
+                <span onClick={() => deletePhoto(preview.name, setFieldValue)}>
+                  X
+                </span>
               </div>
             )}
             <Button
