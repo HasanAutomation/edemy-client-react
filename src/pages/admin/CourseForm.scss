@@ -14,11 +14,16 @@
   span {
     position: absolute;
     font-size: 30px;
-    color: red;
+    color: white;
     font-weight: bold;
     right: 13px;
     cursor: pointer;
-    top: 10px;
+    top: px;
     transform: rotate(10deg);
+    border-radius: 50%;
+    border: 5px solid red;
+    object-fit: contain;
+    background-color: red;
+    overflow: hidden;
   }
 }

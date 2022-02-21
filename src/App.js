@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import { AdminDashboard, Home } from './pages';
+import { AdminDashboard, Home, Landing } from './pages';
 import Navbar from './components/nav/Navbar';
 import ModalManager from './components/modals/ModalManager';
 import SandBox from './pages/sandBox/SandBox';
@@ -34,7 +34,7 @@ function App() {
     <>
       <ToastContainer hideProgressBar position='bottom-right' />
       <ModalManager />
-      <Route exact path='/' component={Home} />
+      <Route exact path='/' component={Landing} />
       <Route
         path={'/(.+)'}
         render={() => (
@@ -43,6 +43,7 @@ function App() {
             <div className='main'>
               <Switch>
                 <AdminRoute path='/sandbox' component={SandBox} />
+                <Route exact path='/courses' component={Home} />
                 <AdminRoute
                   path='/admin/dashboard'
                   component={AdminDashboard}

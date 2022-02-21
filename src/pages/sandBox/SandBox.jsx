@@ -5,7 +5,6 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
 import AppInput from '../../components/forms/AppInput';
-import CustomVideoPlayer from '../../components/video/CustomVideoPlayer';
 import CustomAccordian from '../../components/customAccordian/CustomAccordian';
 
 const validationSchema = Yup.object({
@@ -39,6 +38,7 @@ function SandBox() {
       <CustomAccordian>
         <h1>Hello There</h1>
       </CustomAccordian>
+      {/* <Switch /> */}
     </Container>
   );
 }

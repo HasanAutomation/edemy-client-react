@@ -5,14 +5,23 @@ import { useParams } from 'react-router-dom';
 import coursesApi from '../../api/courses';
 import LoadingComponent from '../../components/loader/LoadingComponent';
 import useFetchData from '../../hooks/useFetchData';
-import { listenAdminCourses } from '../../redux/course/courseActions';
-import { EditOutlined, CheckOutlined } from '@ant-design/icons';
+import {
+  listenAdminCourses,
+  updateCourse,
+} from '../../redux/course/courseActions';
+import {
+  EditOutlined,
+  CheckOutlined,
+  QuestionOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import './Course.scss';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
 import CustomAccordian from '../../components/customAccordian/CustomAccordian';
+import { toast } from 'react-toastify';
 
 function Course() {
   const { slug } = useParams();
@@ -32,6 +41,17 @@ function Course() {
 
   function openSectionModal() {
     dispatch(openModal({ modalType: 'SectionModal', modalProps: { course } }));
+  }
+
+  async function publishUnpublishCourse(published = false, courseId) {
+    try {
+      const {
+        data: { data },
+      } = await coursesApi.publishUnpublishCourse(courseId, published);
+      dispatch(updateCourse(data.course));
+    } catch (err) {
+      toast.error('Server Error! Try again');
+    }
   }
 
   if (loading || (!course && !error))
@@ -60,7 +80,18 @@ function Course() {
                 history.push(`/admin/dashboard/course/${course.slug}/edit`)
               }
             />
-            <CheckOutlined className='check' />
+            {course.sections.length < 2 ? (
+              <QuestionOutlined />
+            ) : course.published ? (
+              <CloseOutlined
+                onClick={() => publishUnpublishCourse(false, course._id)}
+              />
+            ) : (
+              <CheckOutlined
+                className='check'
+                onClick={() => publishUnpublishCourse(true, course._id)}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -87,7 +118,18 @@ function Course() {
                   {section.lessons.length}{' '}
                   {section.lessons.length > 1 ? 'Lessons' : 'Lesson'}
                 </h4>
-                <button>Add Lesson</button>
+                <button
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        modalType: 'LessonModal',
+                        modalProps: { section, course },
+                      })
+                    )
+                  }
+                >
+                  Add Lesson
+                </button>
               </div>
 
               {section.lessons.map(lesson => (

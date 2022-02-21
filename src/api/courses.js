@@ -8,6 +8,11 @@ const coursesApi = {
   updateCourse: (slug, body) => agent.put(`/courses/${slug}`, body),
   addSection: (slug, instructor, body) =>
     agent.put(`/courses/${slug}/sections/add/${instructor}`, body),
+  addLesson: ({ slug, instructor, body, sectionId }) =>
+    agent.put(`/courses/${slug}/${sectionId}/lessons/add/${instructor}`, body),
+  publishUnpublishCourse: (courseID, published) =>
+    agent.put(`courses/${courseID}/publish-unpublish`, { published }),
+  getPublishedCourses: () => agent.get('/courses/published-courses'),
 };
 
 export default coursesApi;

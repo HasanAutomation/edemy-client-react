@@ -15,11 +15,17 @@ function SingleCourse({ course }) {
           </h3>
           <p className='sections'>{course.sections.length} Sections</p>
           <p className='info'>
-            {course.sections.length < 2
-              ? 'At least 2 sections are needed to publish the course'
-              : course.published
-              ? 'You course is live'
-              : 'You are ready to publish the course'}
+            {course.sections.length < 2 ? (
+              <span style={{ color: 'orange' }}>
+                At least 2 sections are needed to publish the course
+              </span>
+            ) : course.published ? (
+              <span style={{ color: 'green' }}>Your course is live</span>
+            ) : (
+              <span style={{ color: 'green' }}>
+                You are ready to publish the course
+              </span>
+            )}
           </p>
         </div>
       </div>

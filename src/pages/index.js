@@ -1,5 +1,6 @@
-import Home from './home/Home';
+import Landing from './home/Landing';
 import AdminDashboard from './dashboard/AdminDashboard';
 import UserDashboard from './dashboard/UserDashboard';
+import Home from './home/Home';
 
-export { Home, AdminDashboard, UserDashboard };
+export { Landing, AdminDashboard, UserDashboard, Home };

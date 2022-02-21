@@ -1,0 +1,21 @@
+.home {
+  margin-top: 100px;
+  .custom-card {
+    overflow: hidden;
+    cursor: pointer;
+    width: 450px;
+    height: 380px;
+    .image {
+      height: 200px;
+      img {
+        object-fit: cover;
+        height: 100% !important;
+      }
+    }
+    .content {
+      .category {
+        margin-top: 10px;
+      }
+    }
+  }
+}
