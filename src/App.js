@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import LoadingComponent from './components/loader/LoadingComponent';
 import { ToastContainer } from 'react-toastify';
 import AdminRoute from './components/routes/AdminRoute';
+import PublicCourse from './pages/course/PublicCourse';
 
 function App() {
   const { initialized } = useSelector(state => state.async);
@@ -44,6 +45,7 @@ function App() {
               <Switch>
                 <AdminRoute path='/sandbox' component={SandBox} />
                 <Route exact path='/courses' component={Home} />
+                <Route exact path='/courses/:slug' component={PublicCourse} />
                 <AdminRoute
                   path='/admin/dashboard'
                   component={AdminDashboard}

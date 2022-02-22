@@ -31,3 +31,20 @@
   height: 100%;
   padding-left: 10px;
 }
+
+.lesson-title {
+  display: block;
+  align-items: flex-start;
+  text-align: left;
+  white-space: normal;
+}
+.lesson-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.lesson-container .lesson-title,
+.lesson-container .preview {
+  text-decoration: underline;
+  cursor: pointer;
+}

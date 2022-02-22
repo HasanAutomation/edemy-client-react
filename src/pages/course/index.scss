@@ -1,0 +1,38 @@
+.public-course {
+  background-color: #fff;
+  min-height: calc(100vh + 100px);
+  &-top {
+    background-color: #1c1d1f;
+  }
+
+  .name {
+    color: #fff;
+    margin-top: 80px;
+    font-weight: bolder;
+  }
+  .desc {
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  .author {
+    color: #fff;
+    margin-top: 10px;
+  }
+  .latest-update {
+    color: #fff;
+  }
+  .type {
+    color: #fff;
+  }
+  .preview-image {
+    width: 400px;
+    height: 220px;
+    object-fit: cover;
+    // overflow: hidden;
+    margin-top: 80px;
+  }
+  .video-container {
+    object-fit: cover;
+    margin-top: 80px;
+  }
+}

@@ -5,6 +5,7 @@ import RegisterForm from '../../pages/auth/RegisterForm';
 import TestModal from '../../pages/sandBox/TestModal';
 import LessonModal from './LessonModal';
 import SectionModal from './SectionModal';
+import VideoModal from './VideoModal';
 
 function ModalManager() {
   const modalLookup = {
@@ -13,6 +14,7 @@ function ModalManager() {
     LoginForm,
     SectionModal,
     LessonModal,
+    VideoModal,
   };
   const currentModal = useSelector(state => state.modals);
   let renderedModal;
