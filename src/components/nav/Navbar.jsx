@@ -47,7 +47,7 @@ function Navbar() {
           </Formik>
         </Segment>
         {authenticated && (
-          <Menu.Item position='right' as={NavLink} to='/my-learning'>
+          <Menu.Item position='right' as={NavLink} to='/user/my-learning'>
             My Learning
           </Menu.Item>
         )}

@@ -1,5 +1,6 @@
 import {
   GET_ADMIN_COURSES,
+  GET_USER_COURSES,
   PUBLISHED_COURSES,
   UPDATE_COURSE,
 } from './courseConstants';
@@ -21,6 +22,13 @@ export function updateCourse(updatedCourse) {
 export function getPublishedCourses(courses) {
   return {
     type: PUBLISHED_COURSES,
+    payload: courses,
+  };
+}
+
+export function getUserCourses(courses) {
+  return {
+    type: GET_USER_COURSES,
     payload: courses,
   };
 }

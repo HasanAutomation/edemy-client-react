@@ -5,6 +5,7 @@ const constants = {
     currentUser: '/users/current',
     createCourse: '/courses/create',
     adminCourses: '/courses/admin',
+    userCourses: '/users/courses',
   },
   roles: {
     admin: 'admin',

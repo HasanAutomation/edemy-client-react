@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import { AdminDashboard, Home, Landing } from './pages';
+import { AdminDashboard, Home, Landing, UserDashboard } from './pages';
 import Navbar from './components/nav/Navbar';
 import ModalManager from './components/modals/ModalManager';
 import SandBox from './pages/sandBox/SandBox';
@@ -9,6 +9,7 @@ import LoadingComponent from './components/loader/LoadingComponent';
 import { ToastContainer } from 'react-toastify';
 import AdminRoute from './components/routes/AdminRoute';
 import PublicCourse from './pages/course/PublicCourse';
+import PrivateRoute from './components/routes/PrivateRoute';
 
 function App() {
   const { initialized } = useSelector(state => state.async);
@@ -49,6 +50,10 @@ function App() {
                 <AdminRoute
                   path='/admin/dashboard'
                   component={AdminDashboard}
+                />
+                <PrivateRoute
+                  path='/user/dashboard'
+                  component={UserDashboard}
                 />
               </Switch>
             </div>

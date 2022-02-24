@@ -15,11 +15,11 @@ function CourseSections({ sections }) {
     <div>
       <h3>Course Content</h3>
       {sections.map(section => (
-        <>
+        <div key={section._id}>
           <CustomAccordian title={section.title}>
             {section.lessons.map(lesson =>
               lesson.free_preview ? (
-                <div className='lesson-container'>
+                <div className='lesson-container' key={lesson._id}>
                   <p className='lesson-title'>{lesson.title}</p>
                   <p
                     className='preview'
@@ -31,7 +31,7 @@ function CourseSections({ sections }) {
                   </p>
                 </div>
               ) : (
-                <div className='lesson-container'>
+                <div className='lesson-container' key={lesson._id}>
                   <p
                     className='lesson-title'
                     style={{ textDecoration: 'none', cursor: 'auto' }}
@@ -43,7 +43,7 @@ function CourseSections({ sections }) {
             )}
           </CustomAccordian>
           <br />
-        </>
+        </div>
       ))}
     </div>
   );

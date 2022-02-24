@@ -1,5 +1,6 @@
 import {
   GET_ADMIN_COURSES,
+  GET_USER_COURSES,
   PUBLISHED_COURSES,
   UPDATE_COURSE,
 } from './courseConstants';
@@ -7,6 +8,7 @@ import {
 const initialState = {
   adminCourses: [],
   publishedCourses: [],
+  userCourses: [],
 };
 
 export default function courseReducer(state = initialState, { type, payload }) {
@@ -28,6 +30,11 @@ export default function courseReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         publishedCourses: payload,
+      };
+    case GET_USER_COURSES:
+      return {
+        ...state,
+        userCourses: payload,
       };
     default:
       return state;
