@@ -1,0 +1,33 @@
+.student-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  .left {
+    // width: 400px;
+    flex: 0.25;
+    // max-width: 100%;
+    // padding-right: 20px;
+    min-height: 100vh;
+  }
+  .right {
+    background-color: #fff !important;
+    max-width: 100%;
+    flex: 0.75;
+
+    .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      .play-icon {
+        font-size: 100px;
+        color: teal;
+        margin-bottom: 7px;
+      }
+      p {
+        font-size: 30px;
+      }
+    }
+  }
+}

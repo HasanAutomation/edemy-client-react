@@ -24,7 +24,7 @@ function Home() {
         <Grid columns={3}>
           {publishedCourses.map(
             ({ image, instructor, name, slug, category, paid, price }) => (
-              <Grid.Column>
+              <Grid.Column key={slug}>
                 <Card
                   fluid
                   as={Link}

@@ -48,3 +48,8 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.spacer {
+  border-bottom: 0.01px solid lightgray;
+  margin: 5px 0;
+}

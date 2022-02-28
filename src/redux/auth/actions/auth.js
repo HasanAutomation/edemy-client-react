@@ -1,6 +1,6 @@
 import { SIGN_IN, SIGN_OUT } from '../constants/auth';
 import firebase from '../../../services/firebase';
-import { APP_LOADED } from '../../async/asyncReducer';
+import { APP_LOADED, APP_LOADED_STARTED } from '../../async/asyncReducer';
 import usersApi from '../../../api/users';
 import { toast } from 'react-toastify';
 import constants from '../../../utils/constant';
@@ -23,6 +23,7 @@ export function verifyUser() {
     return firebase.auth().onAuthStateChanged(async user => {
       if (user) {
         try {
+          dispatch({ type: APP_LOADED_STARTED });
           setTimeout(async () => {
             const resultToken = await user.getIdTokenResult();
             localStorage.setItem(constants.TOKEN_KEY, resultToken.token);

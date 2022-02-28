@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 import { openModal } from '../../redux/auth/reducer/modalReducer';
 import AppInput from '../../components/forms/AppInput';
 import CustomAccordian from '../../components/customAccordian/CustomAccordian';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Please add a name'),
@@ -14,6 +16,10 @@ const validationSchema = Yup.object({
 function SandBox() {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.test);
+  const history = useHistory();
+
+  console.log(window.location.href);
+
   return (
     <Container>
       <Button
@@ -39,6 +45,12 @@ function SandBox() {
         <h1>Hello There</h1>
       </CustomAccordian>
       {/* <Switch /> */}
+      <Button
+        content='Login With Lacritz'
+        onClick={() => {
+          window.location = `http://localhost:9000?redirect=${window.location.href}`;
+        }}
+      />
     </Container>
   );
 }

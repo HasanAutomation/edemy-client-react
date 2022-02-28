@@ -7,6 +7,7 @@ import { Button, Label } from 'semantic-ui-react';
 import { signInWithEmail } from '../../services/firebaseService';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../redux/auth/reducer/modalReducer';
+import { useLocation } from 'react-router-dom';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -17,6 +18,7 @@ const validationSchema = Yup.object({
 
 function LoginForm() {
   const dispatch = useDispatch();
+
   return (
     <ModalWrapper size='mini' header='Login an User'>
       <Formik
@@ -49,6 +51,16 @@ function LoginForm() {
               type='submit'
               disabled={isSubmitting || !isValid || !dirty}
               loading={isSubmitting}
+            />
+            <Button
+              style={{
+                marginTop: 10,
+              }}
+              content='Login With Lacritz'
+              fluid
+              onClick={() => {
+                window.location = `http://localhost:9000?redirect=${window.location.href}`;
+              }}
             />
           </Form>
         )}

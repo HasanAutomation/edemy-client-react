@@ -12,7 +12,7 @@ export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
       const {
-        user: { email, photoURL, displayName, uid, role, name, _id },
+        user: { email, photoURL, displayName, uid, role, name, _id, courses },
         token,
       } = action.payload;
       return {
@@ -26,6 +26,7 @@ export default function authReducer(state = initialState, action) {
           _id,
           role,
           token,
+          courses,
         },
       };
     case SIGN_OUT:

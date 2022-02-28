@@ -1,0 +1,35 @@
+.course-list-container {
+  padding: 10px;
+  .course-container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 20px;
+
+    .left {
+      display: flex;
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 5px;
+      }
+      .content {
+        .title {
+          color: teal;
+          margin-bottom: 3px;
+        }
+        .lesson {
+          margin-bottom: 3px;
+        }
+      }
+    }
+    .right {
+      .icon-play {
+        font-size: 24px;
+        color: teal;
+      }
+    }
+  }
+}

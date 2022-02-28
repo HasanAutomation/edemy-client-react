@@ -14,11 +14,11 @@ function Navbar() {
     <Menu fixed='top' inverted>
       <Container>
         <Menu.Item as={Link} to='/'>
-          <h1>Edemy</h1>
+          <h1 style={{ color: 'white' }}>LCH</h1>
         </Menu.Item>
-        <Menu.Item as={NavLink} to='/sandbox'>
+        {/* <Menu.Item as={NavLink} to='/sandbox'>
           Sandbox
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item as={NavLink} to='/courses'>
           Courses
         </Menu.Item>

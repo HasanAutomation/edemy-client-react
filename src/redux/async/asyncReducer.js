@@ -2,6 +2,7 @@ const ASYNC_START = 'ASYNC_START';
 const ASYNC_FINISH = 'ASYNC_FINISH';
 const ASYNC_ERROR = 'ASYNC_ERROR';
 export const APP_LOADED = 'APP_LOADED';
+export const APP_LOADED_STARTED = 'APP_LOADED_STARTED';
 
 export function asyncStart() {
   return {
@@ -52,6 +53,11 @@ export default function asyncReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         initialized: true,
+      };
+    case APP_LOADED_STARTED:
+      return {
+        ...state,
+        initialized: false,
       };
     default:
       return state;
