@@ -18,6 +18,8 @@ function SingleCoursePage({ match }) {
   const { user } = useSelector(state => state.auth);
   const [clicked, setClicked] = useState(-1);
   const [content, setContent] = useState(null);
+  const [secIndex, setSecIndex] = useState(0);
+  const [lesIndex, setLesIndex] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -51,22 +53,32 @@ function SingleCoursePage({ match }) {
 
   const { sections } = course;
 
+  function markCompleted(sectionIndex, lessonIndex) {
+    setClicked(lessonIndex);
+    const lesson = sections[sectionIndex].lessons[lessonIndex];
+    if (lesson) {
+      setContent(lesson);
+    }
+  }
+
   return (
     <div className='student-container'>
       <div className='left'>
-        {sections.map(section => (
+        {sections.map((section, sectionIndex) => (
           <div key={section._id} id={section._id}>
             <CustomAccordian title={section.title} key={section._id}>
               <Menu defaultSelectedKeys={[clicked]}>
-                {section.lessons.map((lesson, index) => (
+                {section.lessons.map((lesson, lessonIndex) => (
                   <Item
                     onClick={() => {
-                      setClicked(index);
+                      setClicked(lessonIndex);
                       setContent(lesson);
+                      setSecIndex(sectionIndex);
+                      setLesIndex(lessonIndex + 1);
                     }}
                     key={lesson._id}
                   >
-                    {index + 1} {lesson.title}
+                    {lessonIndex + 1} {lesson.title}
                   </Item>
                 ))}
               </Menu>
@@ -81,6 +93,7 @@ function SingleCoursePage({ match }) {
             {content.video ? (
               <>
                 <ReactPlayer
+                  onEnded={() => markCompleted(secIndex, lesIndex)}
                   playing={true}
                   url={content.video.downloadURL}
                   width='100%'
