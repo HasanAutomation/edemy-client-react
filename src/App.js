@@ -20,32 +20,32 @@ function App() {
   const { initialized } = useSelector(state => state.async);
   const [loading, setLoading] = useState(false);
 
-  // const queryString = useLocation().search;
-  // let token = queryString.split('=')[1];
+  const queryString = useLocation().search;
+  let token = queryString.split('=')[1];
 
-  // useEffect(() => {
-  //   // Make request to the backend
-  //   const t = localStorage.getItem('data-from-bookmarker');
-  //   let tokenDataFromStorage = t ? JSON.parse(t).accessToken : null;
-  //   if (token || tokenDataFromStorage) {
-  //     if (!token && tokenDataFromStorage) token = tokenDataFromStorage;
-  //     setLoading(true);
-  //     axios
-  //       .get('https://bookmark-web-api.herokuapp.com/api/v1/users/me', {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then(({ data }) => {
-  //         localStorage.setItem('data-from-bookmarker', JSON.stringify(data));
-  //         console.log('DATA==', data);
-  //         if (!tokenDataFromStorage)
-  //           window.location.href = window.location.href.split('?')[0];
-  //         setLoading(false);
-  //       })
-  //       .catch(err => console.log(err));
-  //   }
-  // }, [queryString]);
+  useEffect(() => {
+    // Make request to the backend
+    const t = localStorage.getItem('data-from-bookmarker');
+    let tokenDataFromStorage = t ? JSON.parse(t).accessToken : null;
+    if (token || tokenDataFromStorage) {
+      if (!token && tokenDataFromStorage) token = tokenDataFromStorage;
+      setLoading(true);
+      axios
+        .get('https://bookmark-web-api.herokuapp.com/api/v1/users/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(({ data }) => {
+          localStorage.setItem('data-from-bookmarker', JSON.stringify(data));
+          console.log('DATA==', data);
+          if (!tokenDataFromStorage)
+            window.location.href = window.location.href.split('?')[0];
+          setLoading(false);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [queryString]);
 
   // var elem = document.documentElement;
 

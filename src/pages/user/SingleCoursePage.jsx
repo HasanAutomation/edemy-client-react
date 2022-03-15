@@ -44,12 +44,12 @@ function SingleCoursePage({ match }) {
   if (loading || (!error && !course))
     return <LoadingComponent content='Fetching content...' />;
 
-  if (!coursesSlug.includes(match.params.slug))
-    return (
-      <div>
-        <h3>Sorry! You are not enrolled into this courses</h3>
-      </div>
-    );
+  // if (!coursesSlug.includes(match.params.slug))
+  //   return (
+  //     <div>
+  //       <h3>Sorry! You are not enrolled into this courses</h3>
+  //     </div>
+  //   );
 
   const { sections } = course;
 
