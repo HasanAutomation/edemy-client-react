@@ -60,6 +60,17 @@ function LoginForm() {
               fluid
               onClick={() => {
                 window.location = `http://localhost:9000?redirect=${window.location.href}`;
+                // window.open(
+                //   `http://localhost:9000?redirect=${window.location.href}`,
+                //   '_blank',
+                //   'location=yes,height=570,width=520,scrollbars=yes,status=yes'
+                // );
+
+                // window.open(
+                //   `http://localhost:5001/auth?response_type=token&client_id=sample-client-id&redirect_url=${window.location.href}`
+                // );
+
+                dispatch(closeModal());
               }}
             />
           </Form>

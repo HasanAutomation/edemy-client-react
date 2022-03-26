@@ -1,4 +1,9 @@
-import { SIGN_IN, SIGN_OUT } from '../constants/auth';
+import {
+  SET_PRE_AUTH,
+  SET_USER_DATA,
+  SIGN_IN,
+  SIGN_OUT,
+} from '../constants/auth';
 import firebase from '../../../services/firebase';
 import { APP_LOADED, APP_LOADED_STARTED } from '../../async/asyncReducer';
 import usersApi from '../../../api/users';
@@ -15,6 +20,20 @@ export function signInUser(payload) {
 export function signOut() {
   return {
     type: SIGN_OUT,
+  };
+}
+
+export function setPreAuth(data) {
+  return {
+    type: SET_PRE_AUTH,
+    payload: data,
+  };
+}
+
+export function setUserData(data) {
+  return {
+    type: SET_USER_DATA,
+    payload: data,
   };
 }
 

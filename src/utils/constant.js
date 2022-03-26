@@ -6,6 +6,11 @@ const constants = {
     createCourse: '/courses/create',
     adminCourses: '/courses/admin',
     userCourses: '/users/courses',
+    auth: {
+      sendOtp: '/auth/send-otp',
+      verifyOtp: '/auth/verify-otp',
+      newUser: '/auth/new-user',
+    },
   },
   roles: {
     admin: 'admin',

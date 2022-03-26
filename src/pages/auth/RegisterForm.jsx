@@ -1,65 +1,37 @@
 import React from 'react';
-import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
 import ModalWrapper from '../../components/modals/ModalWrapper';
-import AppInput from '../../components/forms/AppInput';
-import { Button, Label } from 'semantic-ui-react';
-import { signUpUserWithEmail } from '../../services/firebaseService';
-import { useDispatch } from 'react-redux';
-import { closeModal } from '../../redux/auth/reducer/modalReducer';
+import EmailForm from './EmailForm';
+import { useState } from 'react';
+import OtpForm from './OtpForm';
+import AccountComplete from './AccountComplete';
 
-const validationSchema = Yup.object({
-  displayName: Yup.string().required('Please add a display name'),
-  email: Yup.string()
-    .required('Please add an email')
-    .email('Please add a valid email'),
-  password: Yup.string().required('Please add a password').min(6),
-});
+const steps = {
+  1: EmailForm,
+  2: OtpForm,
+  3: AccountComplete,
+};
 
 function RegisterForm() {
-  const dispatch = useDispatch();
+  const [stepNumber, setStepNumber] = useState(1);
+
+  const FormComponent = steps[stepNumber];
+
+  function handleNextForm() {
+    setStepNumber(number => number + 1);
+  }
 
   return (
-    <ModalWrapper size='mini' header='Register an User'>
-      <Formik
-        initialValues={{
-          displayName: '',
-          email: '',
-          password: '',
-        }}
-        validationSchema={validationSchema}
-        onSubmit={async (values, { setSubmitting, setErrors }) => {
-          try {
-            await signUpUserWithEmail(values);
-            setSubmitting(false);
-            dispatch(closeModal());
-          } catch (err) {
-            setErrors({ auth: err.message });
-            setSubmitting(false);
-          }
-        }}
-      >
-        {({ isSubmitting, dirty, isValid, errors }) => (
-          <Form className='ui form'>
-            <AppInput name='displayName' placeholder='Please add a name' />
-            <AppInput name='email' placeholder='Please add an email' />
-            <AppInput
-              type='password'
-              name='password'
-              placeholder='Please add a password'
-            />
-            {errors.auth && <Label color='red' basic content={errors.auth} />}
-            <Button
-              type='submit'
-              loading={isSubmitting}
-              disabled={isSubmitting || !isValid || !dirty}
-              fluid
-              color='teal'
-              content='SIGN UP'
-            />
-          </Form>
-        )}
-      </Formik>
+    <ModalWrapper
+      size='mini'
+      header={
+        stepNumber === 1
+          ? 'Get Started'
+          : stepNumber === 2
+          ? 'OTP Verification'
+          : 'Complete Account'
+      }
+    >
+      <FormComponent handleNextForm={handleNextForm} stepNumber={stepNumber} />
     </ModalWrapper>
   );
 }
