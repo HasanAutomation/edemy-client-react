@@ -6,14 +6,14 @@ import AdminModal from '../modals/AdminModal';
 import UnauthModal from '../modals/UnauthModal';
 
 function AdminRoute({ component: Component, ...rest }) {
-  const { authenticated, user } = useSelector(state => state.auth);
+  const { authenticated, authUser } = useSelector(state => state.auth);
   return (
     <Route
       {...rest}
       render={props => {
         return !authenticated ? (
           <UnauthModal {...props} />
-        ) : user.role === constants.roles.admin ? (
+        ) : authUser.role === constants.roles.admin ? (
           <Component {...props} />
         ) : (
           <AdminModal {...props} />

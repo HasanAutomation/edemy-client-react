@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import { AdminDashboard, Home, Landing, UserDashboard } from './pages';
 import Navbar from './components/nav/Navbar';
 import ModalManager from './components/modals/ModalManager';
-import SandBox from './pages/sandBox/SandBox';
 import { useSelector } from 'react-redux';
 import LoadingComponent from './components/loader/LoadingComponent';
 import { ToastContainer } from 'react-toastify';
@@ -12,44 +11,13 @@ import PublicCourse from './pages/course/PublicCourse';
 import PrivateRoute from './components/routes/PrivateRoute';
 import UserCoursesListContainer from './pages/user/UserCoursesListContainer';
 import SingleCoursePage from './pages/user/SingleCoursePage';
-import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useCurrentUser } from './hooks/useCurrentUser';
 
 function App() {
   const { initialized } = useSelector(state => state.async);
-  const [loading, setLoading] = useState(false);
+  useCurrentUser();
 
-  // const queryString = useLocation().search;
-  // let token = queryString.split('=')[1];
-
-  // useEffect(() => {
-  //   // Make request to the backend
-  //   const t = localStorage.getItem('data-from-bookmarker');
-  //   let tokenDataFromStorage = t ? JSON.parse(t).accessToken : null;
-  //   if (token || tokenDataFromStorage) {
-  //     if (!token && tokenDataFromStorage) token = tokenDataFromStorage;
-  //     setLoading(true);
-  //     axios
-  //       .get('https://bookmark-web-api.herokuapp.com/api/v1/users/me', {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then(({ data }) => {
-  //         localStorage.setItem('data-from-bookmarker', JSON.stringify(data));
-  //         console.log('DATA==', data);
-  //         if (!tokenDataFromStorage)
-  //           window.location.href = window.location.href.split('?')[0];
-  //         setLoading(false);
-  //       })
-  //       .catch(err => console.log(err));
-  //   }
-  // }, [queryString]);
-
-  // var elem = document.documentElement;
-
-  if (!initialized || loading) return <LoadingComponent />;
+  if (!initialized) return <LoadingComponent />;
 
   return (
     <>

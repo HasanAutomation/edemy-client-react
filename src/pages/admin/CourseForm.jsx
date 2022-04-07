@@ -55,6 +55,7 @@ function CourseForm() {
   const selectedCourse = useSelector(state =>
     state.course.adminCourses.find(c => c.slug === slug)
   );
+  const { authUser } = useSelector(state => state.auth);
   const { loading } = useSelector(state => state.async);
   const [preview, setPreview] = useState(selectedCourse?.image || null);
   const [isPaid, setIsPaid] = useState(selectedCourse?.paid || false);
@@ -86,7 +87,7 @@ function CourseForm() {
   function handleUploadPhoto(file, setFieldValue) {
     setUploading(true);
     const filename = cuid() + '.' + getFileExtension(file.name);
-    const uploadTask = uploadToFirebase(filename, file);
+    const uploadTask = uploadToFirebase(filename, file, authUser._id);
     uploadTask.on(
       'state_changed',
       snapshot => {

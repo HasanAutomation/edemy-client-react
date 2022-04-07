@@ -17,7 +17,7 @@ function UserCoursesList({ courses = [] }) {
   return (
     <div className='course-list-container'>
       {courses.map(course => (
-        <div className='course-container'>
+        <div className='course-container' key={course._id}>
           <div className='left'>
             <img src={course.image.downloadURL} alt={course.name} />
             <div className='content'>

@@ -15,7 +15,6 @@ function AdminDashboard() {
     },
     {
       name: 'Create Course',
-      // path: '/create-course',
       path: ['/create-course', '/course/:slug/edit'],
       exact: true,
       component: CourseForm,
@@ -31,12 +30,6 @@ function AdminDashboard() {
       path: '/course/:slug',
       component: Course,
     },
-    // {
-    //   name: '',
-    //   path: '/course/:slug/edit',
-    //   component: CourseForm,
-    //   exact: true,
-    // },
   ];
 
   return <Sidebar menus={routes} />;

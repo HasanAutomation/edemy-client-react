@@ -15,7 +15,7 @@ import { PlayCircleOutlined } from '@ant-design/icons';
 const { Item } = Menu;
 
 function SingleCoursePage({ match }) {
-  const { user } = useSelector(state => state.auth);
+  const { authUser } = useSelector(state => state.auth);
   const [clicked, setClicked] = useState(-1);
   const [content, setContent] = useState(null);
   const [secIndex, setSecIndex] = useState(0);
@@ -37,19 +37,19 @@ function SingleCoursePage({ match }) {
 
   let coursesSlug = [];
 
-  user.courses.forEach(course => {
+  authUser.courses.forEach(course => {
     coursesSlug.push(course.slug);
   });
 
   if (loading || (!error && !course))
     return <LoadingComponent content='Fetching content...' />;
 
-  if (!coursesSlug.includes(match.params.slug))
-    return (
-      <div>
-        <h3>Sorry! You are not enrolled into this courses</h3>
-      </div>
-    );
+  // if (!coursesSlug.includes(match.params.slug))
+  //   return (
+  //     <div>
+  //       <h3>Sorry! You are not enrolled into this courses</h3>
+  //     </div>
+  //   );
 
   const { sections } = course;
 

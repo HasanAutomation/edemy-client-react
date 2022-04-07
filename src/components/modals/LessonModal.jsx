@@ -2,6 +2,7 @@ import cuid from 'cuid';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Button, Checkbox, FormField, Progress } from 'semantic-ui-react';
@@ -24,6 +25,7 @@ function LessonModal({ course, section }) {
   const [progress, setProgress] = useState('');
   const [free_preview, setFreePreview] = useState(false);
   const dispatch = useDispatch();
+  const { authUser } = useSelector(state => state.auth);
 
   const initialValues = {
     title: '',
@@ -36,7 +38,7 @@ function LessonModal({ course, section }) {
   function handleVideoPhoto(file, setFieldValue) {
     setUploading(true);
     const filename = cuid() + '.' + getFileExtension(file.name);
-    const uploadTask = uploadToFirebase(filename, file);
+    const uploadTask = uploadToFirebase(filename, file, authUser._id);
     uploadTask.on(
       'state_changed',
       snapshot => {

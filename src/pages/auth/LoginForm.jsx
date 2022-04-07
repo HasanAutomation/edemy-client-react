@@ -4,10 +4,10 @@ import { Form, Formik } from 'formik';
 import ModalWrapper from '../../components/modals/ModalWrapper';
 import AppInput from '../../components/forms/AppInput';
 import { Button, Label } from 'semantic-ui-react';
-import { signInWithEmail } from '../../services/firebaseService';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../redux/auth/reducer/modalReducer';
-import { useLocation } from 'react-router-dom';
+import authApi from '../../api/auth';
+import { setUserData } from '../../redux/auth/actions/auth';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -25,11 +25,16 @@ function LoginForm() {
         initialValues={{ email: '', password: '' }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           try {
-            await signInWithEmail(values);
+            const {
+              data: { data },
+            } = await authApi.login(values);
+            dispatch(setUserData(data.user));
             setSubmitting(false);
             dispatch(closeModal());
           } catch (err) {
-            setErrors({ auth: 'Invalid Credentials' });
+            console.log(err.response.data.errors);
+            const error = err.response.data.errors[0].error;
+            setErrors({ auth: error || 'Invalid Credentials' });
             setSubmitting(false);
           }
         }}

@@ -9,7 +9,7 @@ import SignedInMenu from './SignedInMenu';
 import SignedOutMenu from './SignedOutMenu';
 
 function Navbar() {
-  const { authenticated, user } = useSelector(state => state.auth);
+  const { authenticated, authUser } = useSelector(state => state.auth);
   return (
     <Menu fixed='top' inverted>
       <Container>
@@ -52,7 +52,7 @@ function Navbar() {
           </Menu.Item>
         )}
 
-        {authenticated ? <SignedInMenu user={user} /> : <SignedOutMenu />}
+        {authenticated ? <SignedInMenu user={authUser} /> : <SignedOutMenu />}
       </Container>
     </Menu>
   );

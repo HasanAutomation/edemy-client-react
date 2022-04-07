@@ -10,6 +10,8 @@ const constants = {
       sendOtp: '/auth/send-otp',
       verifyOtp: '/auth/verify-otp',
       newUser: '/auth/new-user',
+      login: '/auth/login',
+      current: '/auth/current',
     },
   },
   roles: {

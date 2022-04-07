@@ -8,5 +8,7 @@ const authApi = {
     agent.post(constants.endpoints.auth.verifyOtp, data),
   completeRegistration: data =>
     agent.post(constants.endpoints.auth.newUser, data),
+  login: data => agent.post(constants.endpoints.auth.login, data),
+  getCurrentUser: () => agent.get(constants.endpoints.auth.current),
 };
 export default authApi;
