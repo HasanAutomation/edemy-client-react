@@ -11,6 +11,7 @@ import ReactPlayer from 'react-player';
 import './singleCourse.scss';
 import ReactMarkdown from 'react-markdown';
 import { PlayCircleOutlined } from '@ant-design/icons';
+import ErrorComponent from '../../components/error/ErrorComponent';
 
 const { Item } = Menu;
 
@@ -30,26 +31,15 @@ function SingleCoursePage({ match }) {
   );
 
   useFetchData({
-    request: () => coursesApi.getSingleCourse(match.params.slug),
+    request: () => coursesApi.getUserCourse(match.params.slug),
     data: ({ data }) => dispatch(getUserCourses([data.course])),
     deps: [match.params.slug, dispatch],
-  });
-
-  let coursesSlug = [];
-
-  authUser.courses.forEach(course => {
-    coursesSlug.push(course.slug);
   });
 
   if (loading || (!error && !course))
     return <LoadingComponent content='Fetching content...' />;
 
-  // if (!coursesSlug.includes(match.params.slug))
-  //   return (
-  //     <div>
-  //       <h3>Sorry! You are not enrolled into this courses</h3>
-  //     </div>
-  //   );
+  if (error) return <ErrorComponent message={error[0].error} />;
 
   const { sections } = course;
 

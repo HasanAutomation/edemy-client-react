@@ -15,6 +15,7 @@ const coursesApi = {
   getPublishedCourses: () => agent.get('/courses/published-courses'),
   checkEnrollmentServer: slug => agent.get(`/courses/check-enrollment/${slug}`),
   freeEnroll: courseId => agent.put(`/courses/free-enrollment/${courseId}`, {}),
+  getUserCourse: slug => agent.get(`/courses/user/course/${slug}`),
 };
 
 export default coursesApi;

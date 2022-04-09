@@ -20,7 +20,7 @@ function Home() {
   return (
     <Container>
       <div className='home'>
-        <h1>Featured Courses</h1>
+        <h1>All Courses</h1>
         <Grid columns={3}>
           {publishedCourses.map(
             ({ image, instructor, name, slug, category, paid, price }) => (

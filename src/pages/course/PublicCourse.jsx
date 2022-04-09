@@ -132,20 +132,23 @@ function PublicCourse({ match }) {
                 />
               )}
               {authenticated ? (
-                isEnrolled ? (
-                  <Button
-                    content='Go To Course'
-                    onClick={() => history.push(`/user/courses/${slug}`)}
-                  />
-                ) : (
-                  <Button
-                    style={{ marginTop: 10 }}
-                    content='Enroll'
-                    onClick={handleCourseEnrollment}
-                    fluid
-                    loading={enrollLoading}
-                  />
-                )
+                <div style={{ width: '100%' }}>
+                  {isEnrolled ? (
+                    <Button
+                      style={{ width: '100%', marginTop: 10 }}
+                      content='Go To Course'
+                      onClick={() => history.push(`/user/courses/${slug}`)}
+                    />
+                  ) : (
+                    <Button
+                      style={{ marginTop: 10, width: '100%' }}
+                      content='Enroll'
+                      onClick={handleCourseEnrollment}
+                      fluid
+                      loading={enrollLoading}
+                    />
+                  )}
+                </div>
               ) : (
                 <Button
                   style={{ marginTop: 10 }}
